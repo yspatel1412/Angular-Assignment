@@ -1,0 +1,33 @@
+<h1>Tesla Quiz</h1>
+
+<form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+  <div *ngFor="let q of questions" class="question-block">
+    <p><strong>{{ q.question }}</strong></p>
+
+    <div class="option-row">
+      <label *ngFor="let opt of q.options" [for]="q.key + '-' + opt">
+        <input
+          type="radio"
+          [id]="q.key + '-' + opt"
+          [formControlName]="q.key"
+          [value]="opt"
+        />
+        {{ opt }}
+      </label>
+    </div>
+
+    <div *ngIf="submitted && f[q.key].errors" class="error">
+      This question is required
+    </div>
+  </div>
+
+  <button type="submit">Submit</button>
+
+  <div *ngIf="results.length > 0" class="success">
+    <h3>Results:</h3>
+    <ul>
+      <li *ngFor="let res of results">{{ res }}</li>
+    </ul>
+    <p>Your Score: {{ score }}/4</p>
+  </div>
+</form>
