@@ -23,11 +23,11 @@ export class ApiDataComponent implements OnInit {
   fetchNews() {
     this.isLoading = true;
     
-    const apiUrl = 'https://newsapi.org/v2/everything?q=tesla&from=2025-03-07&sortBy=publishedAt&apiKey=c25d2a2369244d20842ffca2772f79ca';
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
     
     this.http.get(apiUrl).subscribe({
       next: (data: any) => {
-        this.articles = data.articles;  
+        this.articles = data;  
         this.isLoading = false;
       },
       error: (err) => {
